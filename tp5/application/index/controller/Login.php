@@ -13,7 +13,7 @@ class Login extends Controller
 {
     public function login()
     {
-        if(session('studentId') != null)
+        if(session('sno') != null)
             $this->success('登陆成功','messagelist');
         $students = new Students;
         if(request()->isPost())
@@ -23,7 +23,6 @@ class Login extends Controller
             {
                 if(!isset($_SESSION))
                     session_start();
-                session('students.studentId',$result1['studentId']);
                 session('students.sno',$result1['sno']);
                 $this->success('登陆成功','messagelist');
             } else{
@@ -34,7 +33,7 @@ class Login extends Controller
     }
     public function adminerlogin()
     {
-        if(session('adminerId') != null)
+        if(session('adminername') != null)
             $this->success('登陆成功','getData');
         $adminer = new Adminer;
         if(request()->isPost())
@@ -44,8 +43,7 @@ class Login extends Controller
             {
                 if(!isset($_SESSION))
                     session_start();
-                session('adminer.adminerId',$result2['adminerId']);
-                session('adminer.adminername',$result2['name']);
+                session('adminer.adminername',$result2['adminername']);
                 $this->success('登陆成功','getData');
             } else{
                 $this->error('用户名或密码错误','adminerlogin');
