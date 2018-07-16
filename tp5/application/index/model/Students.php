@@ -15,10 +15,14 @@ class Students extends Model
 
     public function comm()
     {
-        return $this->hasMany('message','sudentId','studentId');
+        return $this->hasMany('message','sudentId','studentId');//此步暂时留着以后更改
     }
     public function checkStudent($id,$pw)
     {
-        return Db::name('students')->where(['name'=>$id,'password'=>$pw])->find();
+        return Db::table('students')->where(['sno'=>$id,'password'=>$pw])->find();
+    }
+    public function checkStu($id)
+    {
+        return Db::table('students')->where(['sno'=>$id])->find();
     }
 }

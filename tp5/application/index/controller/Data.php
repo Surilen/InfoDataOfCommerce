@@ -13,23 +13,38 @@ class Data extends Controller
 {
     public function messagelist()
     {
-        $std = Db::table('students')
-            ->where(['studentId'=>session('students.studentId')])
-            ->find();
-        $rows = $std['pagrows'];
-        $list = Db::table('students')
-            ->alias('stds')
-            ->join('message mess','stds.studentId = mess.studentId')
-            ->paginate($rows);
-        $this->assign('list',$list);
-        return $this->fetch('message/messagelist');
+        if(session('studentId') == null)
+        {
+            $this->error('您还未登陆','login');
+        }else {
+            $std = Db::table('students')
+                ->where(['Sno'=>session('studentId')])
+                ->find();
+            $this->assign('info',$std);
+        return view();
+        }
     }
-    public function admmessagelist()
-    {   $rows = Db::table('students')
-        ->count();
-        $list = Db::table('students')
-            ->paginate($rows);
-        $this->assign('list',$list);
-        return $this->fetch('message/admmessagelist');
+    public function getData()
+    {
+        if(session('adminerId') == null)
+        {
+            $this->error('您还未登录','adminerlogin');
+        }else {
+            $stu = new Students;
+            if(request()->isPost())
+            {
+                $result3 = $stu->checkStu(input('post.stusno'));
+                if($result3)
+                {
+                    if(!isset($_SESSION))
+                        session_start();
+                    session('students.studentId',$result3['stuId']);
+                    $this->success('查询成功','messagelist');
+                }else {
+                    $this->error('学号不存在','getData');
+                }
+            }
+            return view();
+        }
     }
 }

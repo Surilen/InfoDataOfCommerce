@@ -13,57 +13,53 @@ class Login extends Controller
 {
     public function login()
     {
-        if(session('students.studentId') != null)
-            $this->success('登陆成功',url('messagelist'));
+        if(session('studentId') != null)
+            $this->success('登陆成功','messagelist');
         $students = new Students;
         if(request()->isPost())
         {
-            $result1 = $students->checkStudent(imput('post.name'),imput('post.password'));
+            $result1 = $students->checkStudent(input('post.sno'),input('post.password'));
             if($result1)
             {
                 if(!isset($_SESSION))
                     session_start();
                 session('students.studentId',$result1['studentId']);
-                session('students.name',$result1['name']);
-                $this->success('登陆成功',url('messagelist'));
+                session('students.sno',$result1['sno']);
+                $this->success('登陆成功','messagelist');
             } else{
-                $this->assign("iserror",1);
-                $this->assign("studentname",imput('post.studentname'));
-                $this->display('login');
+                $this->erroe('学号或密码错误','login');
             }
         }
         return view();
     }
     public function adminerlogin()
     {
-        if(session('adminer.adminerId') != null)
-            $this->success('登陆成功',url('admmessagelist'));
+        if(session('adminerId') != null)
+            $this->success('登陆成功','getData');
         $adminer = new Adminer;
         if(request()->isPost())
         {
-            $result2 = $adminer->checkAdminer(import('post.name'),import('post.password'));
+            $result2 = $adminer->checkAdminer(input('post.adminername'),input('post.password'));
             if($result2)
             {
                 if(!isset($_SESSION))
                     session_start();
                 session('adminer.adminerId',$result2['adminerId']);
-                session('adminer.name',$result2['name']);
-                $this->success('登陆成功',url('admmessagelist'));
+                session('adminer.adminername',$result2['name']);
+                $this->success('登陆成功','getData');
             } else{
-                $this->assign("iserror",1);
-                $this->assign("adminername",imput('post.adminername'));
-                $this->display('adminerlogin');
+                $this->error('用户名或密码错误','adminerlogin');
             }
         }
     }
     public function loginout()
     {
         session(null);
-        $this->success('退出成功',url('login'));
+        $this->success('退出成功','login');
     }
     public function adminerloginout()
     {
         session(null);
-        $this->success('退出成功',url('adminerlogin'));
+        $this->success('退出成功','adminerlogin');
     }
 }
