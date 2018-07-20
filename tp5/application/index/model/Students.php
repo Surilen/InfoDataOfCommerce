@@ -25,4 +25,8 @@ class Students extends Model
     {
         return Db::table('articles')->where(['term'=>$tm,'Sno'=>$id])->find();
     }
+    public function getArticles($id)
+    {
+        return Db::table('articles')->where('Sno',$id)->find();
+    }
 }

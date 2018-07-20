@@ -26,7 +26,9 @@ class Login extends Controller
                 if(!isset($_SESSION))
                     session_start();
                 session('students.sno',$result1['sno']);
-                $this->success('登陆成功','messagelist');
+//                $this->success('登陆成功','messagelist');
+                $res = new Data();
+                $res->article();
             } else{
                 $this->erroe('学号或密码错误','login');
             }

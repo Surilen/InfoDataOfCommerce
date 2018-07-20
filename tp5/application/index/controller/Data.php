@@ -26,14 +26,16 @@ class Data extends Controller
         return view();
         }
     }
-    public function articlelist()
-    {   $stud = new Students;
-        if(request()->isPost())
+    public function article()
+    {
+        if(session('sno') == null)
         {
-            $art = $stud->getArticle(input('post.term'),session('sno'));
-            $this->assign('content',$art);
-            return view();
+            $this->error('您还未登录','index/Login/login');
         }
+        $stud = new Students;
+        $art = $stud->getArticles(session('sno'));
+        $this->assign('content',$art);
+        return view();
     }
     public function getData()
     {
@@ -41,6 +43,7 @@ class Data extends Controller
         {
             $this->error('您还未登录','index/Login/login');
         }else {
+            $stu = new Students;
             if(request()->isPost())
             {
                 $result3 = $stu->checkStu(input('post.sno'));
