@@ -8,6 +8,8 @@
 
 namespace app\index\controller;
 use think\Controller;
+use app\index\model\Students;
+use app\index\model\Adminer;
 
 class Login extends Controller
 {
@@ -52,12 +54,12 @@ class Login extends Controller
     }
     public function loginout()
     {
-        session(null);
+        session('sno',null);
         $this->success('退出成功','login');
     }
     public function adminerloginout()
     {
-        session(null);
+        session('adminername',null);
         $this->success('退出成功','adminerlogin');
     }
 }
