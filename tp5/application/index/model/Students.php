@@ -13,10 +13,6 @@ class Students extends Model
 {
     protected $table = 'students';
 
-    public function comm()
-    {
-        return $this->hasMany('message','sudentId','studentId');//此步暂时留着以后更改
-    }
     public function checkStudent($id,$pw)
     {
         return Db::table('students')->where(['Sno'=>$id,'password'=>$pw])->find();
