@@ -27,6 +27,6 @@ class Students extends Model
     }
     public function getArticles($id)
     {
-        return Db::table('articles')->where('Sno',$id)->find();
+        return Db::table('articles')->where('Sno',$id)->select();
     }
 }

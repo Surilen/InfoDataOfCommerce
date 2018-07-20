@@ -34,7 +34,13 @@ class Data extends Controller
         }
         $stud = new Students;
         $art = $stud->getArticles(session('sno'));
-        $this->assign('content',$art);
+        //TODO 这里需要处理数据
+        $content = array();
+        foreach($art as $v)
+        {
+            $content[$v['term']]=$v['content'];
+        }
+        $this->assign('content',$content);
         return view();
     }
     public function getData()
