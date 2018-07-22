@@ -40,7 +40,7 @@ class Data extends Controller
             $content[$v['term']]=$v['content'];
         }
         $this->assign('content',$content);
-        return view();
+        return $this->fetch('Data/article');;
     }
     public function getData()
     {

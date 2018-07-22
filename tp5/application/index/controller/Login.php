@@ -33,7 +33,7 @@ class Login extends Controller
                 $this->error('学号或密码错误','login');
             }
         }
-        return view();
+        return $this->fetch('Login/login');
     }
     public function adminerlogin()
     {
@@ -57,7 +57,7 @@ class Login extends Controller
     public function loginout()
     {
         session('sno',null);
-        $this->success('退出成功','login');
+        $this->success('退出成功','index/Login/login');
     }
     public function adminerloginout()
     {
