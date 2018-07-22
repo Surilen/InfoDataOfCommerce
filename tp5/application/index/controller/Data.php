@@ -34,7 +34,6 @@ class Data extends Controller
         }
         $stud = new Students;
         $art = $stud->getArticles(session('sno'));
-        //TODO 这里需要处理数据
         $content = array();
         foreach($art as $v)
         {

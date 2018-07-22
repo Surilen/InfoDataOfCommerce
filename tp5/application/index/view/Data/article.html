@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <div id="article" style="margin-right: 10px; margin-left: 10px; margin-top: 10px"></div>
+    <div id="article" style="margin-right: 22px; margin-left: 22px; margin-top: 10px;"></div>
     <!--<div class="col-md-12">-->
       <!--<table class="table table-bordered table-hover bkc">-->
         <!--<caption align="center">个人概况</caption>-->
@@ -70,7 +70,8 @@
 </body>
 <script>
   function getArticle(){
-      document.getElementById('article').innerHTML = "{$content['2017-2018-2']}";
+      var content = '{$content["2017-2018-2"]}';
+      document.getElementById('article').innerHTML = content;
   }
 </script>
 </html>

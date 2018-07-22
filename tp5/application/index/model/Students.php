@@ -15,18 +15,18 @@ class Students extends Model
 
     public function checkStudent($id,$pw)
     {
-        return Db::table('students')->where(['Sno'=>$id,'password'=>$pw])->find();
+        return Db::table('students')->where(['sno'=>$id,'password'=>$pw])->find();
     }
     public function checkStu($id)
     {
-        return Db::table('students')->where(['Sno'=>$id])->find();
+        return Db::table('students')->where(['sno'=>$id])->find();
     }
     public function getArticle($tm,$id)
     {
-        return Db::table('articles')->where(['term'=>$tm,'Sno'=>$id])->find();
+        return Db::table('articles')->where(['term'=>$tm,'sno'=>$id])->find();
     }
     public function getArticles($id)
     {
-        return Db::table('articles')->where('Sno',$id)->select();
+        return Db::table('articles')->where('sno',$id)->select();
     }
 }
