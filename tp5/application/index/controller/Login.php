@@ -16,19 +16,19 @@ class Login extends Controller
     public function login()
     {
         if(session('sno') != null)
-//            $this->success('登陆成功','messagelist');
+//            $this->success('您已经登录过了','index/Data/article');
             $this->redirect('index/Data/article');
-        $students = new Students;
         if(request()->isPost())
         {
+            $students = new Students;
             $result1 = $students->checkStudent(input('post.sno'),input('post.password'));
             if($result1)
             {
                 if(!isset($_SESSION))
                     session_start();
                 session('sno',$result1['sno']);
-//                $this->success('登陆成功','messagelist');
-                $this->redirect('index/Data/article');
+                $this->success('登陆成功','index/Data/article');
+//                $this->redirect('index/Data/article');
             } else{
                 $this->error('学号或密码错误','login');
             }
@@ -38,7 +38,7 @@ class Login extends Controller
     public function adminerlogin()
     {
         if(session('adminername') != null)
-            $this->success('登陆成功','getData');
+            $this->success('登陆成功','index/Login/getData');
         $adminer = new Adminer;
         if(request()->isPost())
         {
@@ -62,6 +62,6 @@ class Login extends Controller
     public function adminerloginout()
     {
         session('adminername',null);
-        $this->success('退出成功','adminerlogin');
+        $this->success('退出成功','index/Login/adminerlogin');
     }
 }

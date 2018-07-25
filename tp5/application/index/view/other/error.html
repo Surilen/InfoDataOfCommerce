@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>操作失败！</title>
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <link href="https://cdn.bootcss.com/bootstrap/3.0.2/css/bootstrap.css" rel="stylesheet">
+
+
+    <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet" />
+    <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
+    <!--字体优化文件-->
+    <link rel="stylesheet" type="text/css" href="https://static.lurenjia.in/HackDay/public/static/css/default.css">
+
+
+</head>
+<body style="text-align: center">
+
+
+
+<h1>:(</h1>
+<p><?php echo(strip_tags($msg));?></p>
+<p>页面将于2s后<a id="jumpUrl" href=<?php echo(strip_tags($url));?>>跳转……</a></p>
+
+
+<script language="JavaScript">
+    window.onload = function () {
+
+        toastr.options.positionClass = 'toast-bottom-center';    //初始化toaster弹窗提示
+        toastr.warning("操作失败！");
+        setTimeout(function () {
+            toastr.warning("2s后跳转！");
+        }, 200);
+
+        setTimeout(function () {
+                window.location.href = document.getElementById("jumpUrl").getAttribute("href");
+            }
+            , 2000);
+    }
+</script>
+
+</body>
+</html>
