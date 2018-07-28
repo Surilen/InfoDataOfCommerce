@@ -11,14 +11,14 @@ use think\Controller;
 
 class Admin extends Controller
 {
-    public function getPage()
+    public function getpage()
     {
         if(session('adminername')==null)
         {
             $this->error('您还未登录或没有管理员权限','index/Login/adminerlogin');
         }
         $this->assign('name',session('adminername'));
-        return $this->fetch('Admin/main');
+        return view('Admin/main');
     }
 
     //TODO 学生信息查看；学生信息修改时间设定；生成/导出excel表格

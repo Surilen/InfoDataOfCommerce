@@ -46,23 +46,27 @@ class Login extends Controller
 
     public function adminerlogin()
     {
+        //339 340 is ADMIN
         if(session('adminername') != null)
             $this->redirect('index/Admin/getPage');
         if(request()->isPost())
         {
-            $adminer = new Adminer;
-            $result2 = $adminer->checkAdminer(input('post.name'),base64_encode(md5(input('post.password'))));
+            $result2 = Db('students')
+                ->where(['sno'=>input('post.name'),
+                    'password'=>base64_encode(md5(input('post.password')))
+                ])
+                ->find();
             if($result2)
             {
                 if(!isset($_SESSION))
                     session_start();
                 session('adminername',$result2['name']);
-                $this->success('登陆成功','index/Admin/getPage');
+                $this->redirect('index/Admin/getpage');
             } else{
                 $this->error('用户名或密码错误','index/Login/adminerlogin');
             }
         }
-        return $this->fetch('Login/adminlogin');
+        return view('Login/adminlogin');
     }
 
     public function loginout()
@@ -74,7 +78,7 @@ class Login extends Controller
     public function adminerloginout()
     {
         session('adminername',null);
-        $this->success('退出成功','index/Login/adminerlogin');
+        $this->redirect('index/Login/adminerlogin');
     }
 
     private function work()
