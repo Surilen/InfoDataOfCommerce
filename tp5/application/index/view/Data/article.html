@@ -21,8 +21,14 @@
 </head>
 <body>
 {include file='other/headlink'}
-<div align="left" style="margin-left: 3px"></div><button type="button" class="btn btn-info"><a href="{:url('index/Login/loginout')}">退出登录</a></button></div>
-  <h1 align="center">个人信息</h1>
+<div align="left" style="margin-left: 3px">
+  <button type="button" class="btn btn-info">
+    <a href="{:url('index/Login/loginout')}">退出登录</a>
+  </button>
+</div>
+<h1 align="center">个人信息</h1>
+<div align="right" style="margin-right: 3px;margin-top: 3px;">{:$name}同学！欢迎您!</div>
+  <hr>
   <div class="contaner">
     <div class="col-md-12">
       <caption align="center">致家长的一封信</caption>

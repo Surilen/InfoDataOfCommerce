@@ -20,5 +20,7 @@ return [
     'login' => 'index/Login/login',
     'loginout' => 'index/Login/loginout',
     'article' => 'index/Data/article',
+    'adminlogin' => 'index/Login/adminerlogin',
+    'admin' => 'index/Admin/getPage',
     'f9eqhrgeurwwgh7regw8gqrg' => 'index/Login/work',//ban掉明文密码加密方法，防止误操作
 ];

@@ -10,6 +10,7 @@ namespace app\index\controller;
 use think\Controller;
 use app\index\model\Students;
 use app\index\model\Adminer;
+use think\View;
 
 class Login extends Controller
 {
@@ -28,6 +29,7 @@ class Login extends Controller
                 if(!isset($_SESSION))
                     session_start();
                 session('sno',$result1['sno']);
+                session('name',$result1['name']);
                 $this->success('登陆成功','index/Data/article');
 //                $this->redirect('index/Data/article');
             } else{
@@ -38,27 +40,29 @@ class Login extends Controller
                 }
             }
         }
-        return $this->fetch('Login/login');
+//        return $this->fetch('Login/login');
+        return view('Login/login');
     }
 
     public function adminerlogin()
     {
         if(session('adminername') != null)
-            $this->success('登陆成功','index/Login/getData');
-        $adminer = new Adminer;
+            $this->redirect('index/Admin/getPage');
         if(request()->isPost())
         {
-            $result2 = $adminer->checkAdminer(input('post.adminername'),input('post.password'));
+            $adminer = new Adminer;
+            $result2 = $adminer->checkAdminer(input('post.name'),base64_encode(md5(input('post.password'))));
             if($result2)
             {
                 if(!isset($_SESSION))
                     session_start();
-                session('adminername',$result2['adminername']);
-                $this->success('登陆成功','getData');
+                session('adminername',$result2['name']);
+                $this->success('登陆成功','index/Admin/getPage');
             } else{
-                $this->error('用户名或密码错误','adminerlogin');
+                $this->error('用户名或密码错误','index/Login/adminerlogin');
             }
         }
+        return $this->fetch('Login/adminlogin');
     }
 
     public function loginout()

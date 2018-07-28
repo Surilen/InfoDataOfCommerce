@@ -16,6 +16,6 @@ class Adminer extends Model
 
     public function checkAdminer($id,$pw)
     {
-        return Db::table('adminer')->where(['adminername'=>$id,'password'=>$pw])->find();
+        return Db::table('students')->where(['adminername'=>$id,'password'=>$pw])->find();
     }
 }

@@ -26,6 +26,7 @@ class Data extends Controller
         return view();
         }
     }
+
     public function article()
     {
         if(session('sno') == null)
@@ -39,11 +40,14 @@ class Data extends Controller
         {
             $content[$v['term']]=$v['content'];
         }
+        $this->assign('name',session('name'));
         $this->assign('content',$content);
-        return $this->fetch('Data/article');;
+        return view('Data/article');
     }
+
     public function getData()
     {
+        //TODO 学生信息要有银行卡号（很重要）、工时等
         if((!session('adminername') == null) || (!session('sno') == null))
         {
             $this->error('您还未登录','index/Login/login');
