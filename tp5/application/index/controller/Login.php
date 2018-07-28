@@ -73,7 +73,7 @@ class Login extends Controller
         $this->success('退出成功','index/Login/adminerlogin');
     }
 
-    public function work()
+    private function work()
     {
         $student = Db('students')->select();
         $cnt = 0;
