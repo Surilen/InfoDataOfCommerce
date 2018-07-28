@@ -21,7 +21,8 @@ class Login extends Controller
         if(request()->isPost())
         {
             $students = new Students;
-            $result1 = $students->checkStudent(input('post.sno'),input('post.password'));
+            $sno = input('post.sno');
+            $result1 = $students->checkStudent($sno,base64_encode(md5(input('post.password'))));
             if($result1)
             {
                 if(!isset($_SESSION))
@@ -30,11 +31,16 @@ class Login extends Controller
                 $this->success('登陆成功','index/Data/article');
 //                $this->redirect('index/Data/article');
             } else{
-                $this->error('学号或密码错误','login');
+                if($students->checkStu($sno)) {
+                    $this->error('密码错误', 'index/Login/login');
+                }else{
+                    $this->error('系统中暂无此人', 'index/Login/login');
+                }
             }
         }
         return $this->fetch('Login/login');
     }
+
     public function adminerlogin()
     {
         if(session('adminername') != null)
@@ -54,14 +60,30 @@ class Login extends Controller
             }
         }
     }
+
     public function loginout()
     {
         session('sno',null);
         $this->success('退出成功','index/Login/login');
     }
+
     public function adminerloginout()
     {
         session('adminername',null);
         $this->success('退出成功','index/Login/adminerlogin');
+    }
+
+    public function work()
+    {
+        $student = Db('students')->select();
+        $cnt = 0;
+        foreach ($student as $v)
+        {
+            $pass = $v['password'];
+//            echo $pass . '<br>';
+            $res = Db('students')->where('sno',$v['sno'])->setField('password',base64_encode(md5($pass)));
+            if($res) $cnt++;
+        }
+        echo $cnt . 'Success!';
     }
 }
