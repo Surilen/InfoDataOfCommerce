@@ -6,7 +6,7 @@ Product Manager:
 
 Developer:
 
-- Fore-End:Malcole
+- Fore-End:Malcolm
 - Back-End:Surilen
 
 Database Design:
@@ -14,4 +14,4 @@ Database Design:
 - 王有鹏
 - 王世超
 - 翁锦锐
-- 张政国
+- 张振国
